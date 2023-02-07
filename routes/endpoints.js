@@ -132,7 +132,7 @@ router.post('/login', async (req, res) => {
 
 
 router.get("/vehicles", (req, res) => {
-  client.query("SELECT * FROM vehicles", (err, result) => {
+  client.query("SELECT * FROM vehicles ORDER BY price ASC", (err, result) => {
     if (err) {
       res.status(400).send(err);
     }
