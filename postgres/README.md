@@ -1,6 +1,6 @@
 # Postgres step by step
 
-## 1) Install postgres locally with following commands on linux ubuntu 20.4
+## 1) Install postgres locally with following commands (was used a linux ubuntu distribution)
 
 a) Clone the repository
 ```bash
