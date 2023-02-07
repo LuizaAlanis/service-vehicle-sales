@@ -22,7 +22,7 @@ async function registerVehicle(brand, model, image, price) {
       const text = 'INSERT INTO vehicles (brand, model, image, price) \
         VALUES ($1, $2, $3, $4) \
         RETURNING id ';
-      const values = [brand, model, image];
+      const values = [brand, model, image, price];
       client.query(text, values)
       .then(result => {
         res(result)
@@ -51,7 +51,7 @@ async function updateVehicle(vehicleId, brand, model, image, price) {
     setTimeout(() => {
       const text = 'UPDATE vehicles SET brand = $2, model = $3, \
       image = $4, price = $5 WHERE id = $1';
-      const values = [vehicleId, brand, model, image];
+      const values = [vehicleId, brand, model, image, price];
       client.query(text, values)
       .then(result => {
         res(result)
