@@ -16,10 +16,10 @@ client.connect();
 
 
 //CRUD
-async function registerVehicle(brand, model, image, value) {
+async function registerVehicle(brand, model, image, price) {
   return new Promise((res,rej) => {
     setTimeout(() => {
-      const text = 'INSERT INTO vehicles (brand, model, image, value) \
+      const text = 'INSERT INTO vehicles (brand, model, image, price) \
         VALUES ($1, $2, $3, $4) \
         RETURNING id ';
       const values = [brand, model, image];
@@ -46,11 +46,11 @@ async function getVehicle(vehicleId) {
   })
 }
 
-async function updateVehicle(vehicleId, brand, model, image, value) {
+async function updateVehicle(vehicleId, brand, model, image, price) {
   return new Promise((res,rej) => {
     setTimeout(() => {
       const text = 'UPDATE vehicles SET brand = $2, model = $3, \
-      image = $4, value = $5 WHERE id = $1';
+      image = $4, price = $5 WHERE id = $1';
       const values = [vehicleId, brand, model, image];
       client.query(text, values)
       .then(result => {
@@ -198,10 +198,10 @@ router.post("/vehicle/register", async (req, res) => {
   const isValid = isTokenValid(token);
 
   if(isValid){
-    const { brand, model, image, value } = req.body;
+    const { brand, model, image, price } = req.body;
 
     try{
-      const vehicle = await registerVehicle(brand, model, image, value);
+      const vehicle = await registerVehicle(brand, model, image, price);
       res.status(200).send(vehicle.rows);
     }catch (err) {
       res.status(400).send(err);
@@ -223,10 +223,10 @@ router.put("/vehicle/update/:vehicleId", async (req, res) => {
 
   if(isValid){
     const vehicleId = req.params.vehicleId
-    const { brand, model, image, value } = req.body;
+    const { brand, model, image, price } = req.body;
 
     try{
-      const vehicle = await updateVehicle(vehicleId, brand, model, image, value);
+      const vehicle = await updateVehicle(vehicleId, brand, model, image, price);
       res.status(200).send('Row(s) updated: ' + vehicle.rowCount);
     }catch (err) {
       res.status(400).send(err);
