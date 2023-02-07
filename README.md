@@ -1,5 +1,8 @@
 # service-vehicle-sales
 
+# Getting Started with Postgres
+
+To setup the database follow the instructions with the README inside postgres folder
 
 # Getting Started with Node.js
 
